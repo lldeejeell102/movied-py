@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="movies-index">Your Movies</h1>
+    <div class="movies">
+        {% for movie in movies %}
+            <div class="movie-block">
+                <img class="movie-block-img" src="{{ movie.Poster }}">
+                <div class="movie-block-title">
+                    <h2 class="movie-title">{{ movie.Title }}</h2>
+                </div>
+                <div class="movie-block-date">
+                    <h5 class="movie-released">{{ movie.Released }}</h5>
+                </div>
+                <div class="movie-block-starring">
+                    <h4 class="starring">Starring:</h4>
+                    <h4 class="movie-actors">{{ movie.Actors }}</h4>
+                </div>
+                <div class="movie-block-plot">
+                    <h5 class="plot">Plot:</h5>
+                    <h5 class="movie-plot">{{ movie.Plot }}</h5>
+                </div>
+                <div class="movie-block-watched-date">
+                    <h5 class="starring">Watched Date:</h5>
+                    <h5 class="movie-actors">{{ movie.Watched or "" }}</h5>
+                </div>
+                <div class="index-forms">
+                    <form action="/movies/{{ movie._id }}" method="GET">
+                        <button class="update-button">Update</button>
+                    </form>
+                    <form action="/movies/{{ movie._id }}?_method=DELETE" method="POST">
+                        <button class="delete-button">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

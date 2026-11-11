@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="edit-div">
+        <form class="edit-form" action="/movies/{{ movie._id }}?_method=PUT" method="POST">
+            <img class="edit-poster" src="{{ movie.Poster }}">
+            <div class="edit-box-1">
+                <h2> {{ movie.Title }}</h2>
+            </div>
+            <div class="edit-box-2">
+                <h4> {{ movie.Released }}</h4>
+            </div>
+            <div class="edit-box-3">
+                <h3 class="edit-titles">Actors:</h3>
+                <h4> {{ movie.Actors }}</h4>
+            </div>
+            <div class="edit-box-4">
+                <h3 class="edit-titles">Plot:</h3>
+                <h4> {{ movie.Plot }}</h4>
+            </div>
+            <div class="edit-box-5">
+                <h3 class="edit-titles">Watched Date:</h3>
+                <h4> {{ movie.Watched or "" }}</h4>
+            </div>
+
+            <div class="submit">
+                <div class="watch-date">
+                    <h4>Watched Date: <input type="date" name="newwatched"></h4>
+                </div>
+                <button class="update">Update!</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

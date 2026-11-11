@@ -1,0 +1,17 @@
+{#
+  Jinja2 template syntax (Flask's version of EJS):
+    double curly braces    -> print a value, like <%= value %> (HTML-escaped)
+    curly brace + percent  -> logic: if / for / include, like <% ... %>
+    curly brace + hash     -> a comment (like this one) that never reaches the browser
+  This base.html is a shared layout. Other pages start with
+  extends "base.html" and fill in the "content" block below, so the
+  head and the header only have to be written once.
+#}
+<!DOCTYPE html>
+<html lang="en">
+{% include "partials/head.html" %}
+<body>
+    {% block header %}{% include "partials/header-loggedin.html" %}{% endblock %}
+    {% block content %}{% endblock %}
+</body>
+</html>

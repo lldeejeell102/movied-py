@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="results-div">
+        {% if data.Response == "False" %}
+        <div class="results-form">
+            <div class="results-box-1">
+                <h2>No movie found</h2>
+            </div>
+            <div class="results-box-2">
+                <h4>{{ data.Error }}</h4>
+                <h4><a href="/movies/add">Try another search</a></h4>
+            </div>
+        </div>
+        {% else %}
+        <form class="results-form" action="/movies/" method="POST">
+            <img class="results-poster" src="{{ data.Poster }}">
+            <div class="results-box-1">
+                <h2> {{ data.Title }}</h2>
+            </div>
+            <div class="results-box-2">
+                <h4> {{ data.Released }}</h4>
+            </div>
+            <div class="results-box-3">
+                <h3 class="results-titles">Actors:</h3>
+                <h4> {{ data.Actors }}</h4>
+            </div>
+            <div class="results-box-4">
+                <h3 class="results-titles">Plot:</h3>
+                <h4> {{ data.Plot }}</h4>
+            </div>
+
+            <div class="submit">
+                <div class="watch-date">
+                    <h4 id="watched-date">Watched Date:
+                        <input type="date" class="watched" name="watched">
+                    </h4>
+                </div>
+                <input type="hidden" name="title" value="{{ data.Title }}">
+                <input type="hidden" name="year" value="{{ data.Year }}">
+                <input type="hidden" name="poster" value="{{ data.Poster }}">
+                <input type="hidden" name="actors" value="{{ data.Actors }}">
+                <input type="hidden" name="plot" value="{{ data.Plot }}">
+                <input type="hidden" name="released" value="{{ data.Released }}">
+                <button class="movied">Movied!</button>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+{% endblock %}
