@@ -1,0 +1,20 @@
+# Render "Blueprint" file: tells Render how to build and run this app.
+# Render reads this when you create a service from the repo (New -> Blueprint).
+services:
+  - type: web
+    name: moved-py
+    runtime: python
+    plan: free  # free tier: sleeps after ~15 min idle, first visit after that takes ~30-60s
+    buildCommand: pip install -r requirements.txt
+    # gunicorn is a production web server for Python apps.
+    # "app:app" = in app.py, use the variable named `app`. Render provides $PORT.
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET
+        generateValue: true  # Render makes a random secret for signing session cookies
+      - key: DATABASE_URL
+        sync: false  # you'll be asked to paste your MongoDB Atlas connection string
+      - key: URL_API
+        sync: false  # you'll be asked to paste your OMDb URL, e.g. http://www.omdbapi.com/?apikey=XXXX

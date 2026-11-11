@@ -30,6 +30,14 @@ python app.py
 
 Production: `gunicorn app:app`
 
+## Deploy (free, on Render)
+
+1. In Render, choose **New → Blueprint** and pick this repo. It reads `render.yaml`.
+2. When asked, paste `DATABASE_URL` (MongoDB Atlas connection string) and `URL_API` (OMDb URL with your key).
+3. In MongoDB Atlas → Network Access, allow `0.0.0.0/0` so Render can connect.
+
+The free plan sleeps after ~15 minutes of no traffic; the next visit takes up to a minute to wake it.
+
 To try it without a real MongoDB, set `USE_MONGOMOCK=1` (needs `pip install -r requirements-dev.txt`); data is in-memory only.
 
 ## Tests
