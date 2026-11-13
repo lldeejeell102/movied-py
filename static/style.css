@@ -2,7 +2,7 @@
 /* COLOR PALETTE — change a color here and it updates everywhere */
 :root{
     --primary: #533747;    /* plum: header, main action buttons */
-    --highlight: #B7D5D4;  /* light teal: hovers, panels, title text */
+    --highlight: #B7D5D4;  /* light teal: used sparingly, for the logo text */
     --deep: #305252;       /* dark teal: text, borders, pressed buttons */
     --muted: #77878B;      /* slate gray: labels and secondary text */
     --accent: #488286;     /* teal: regular buttons, card borders */
@@ -48,8 +48,8 @@ button{
     padding: 5px 15px
 }
 button:hover{
-    background-color: var(--highlight);
-    color: var(--deep);
+    background-color: var(--deep);
+    color: var(--surface);
 }
 button:active{
     background-color: var(--deep);
@@ -125,9 +125,9 @@ button {
     border-radius: 25px;
     padding: 5px 15px;
 }
-/* Text boxes get a soft highlight; the submit button gets the dark teal */
+/* Text boxes get a faint tint; the submit button gets the dark teal */
 .form-inputs input:hover, .form-inputs input:focus{
-    background-color: var(--highlight);
+    background-color: var(--page);
     color: var(--deep);
     outline-color: var(--accent);
 }
@@ -289,8 +289,9 @@ button {
     /* margin-right: 10rem; */
     font: Verdana, sans-serif;
     text-transform: none;
-    background-color: var(--highlight);
-    border: thin solid var(--deep);
+    background-color: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 5px;
 }
 .input-title .input-year{
     width: 33%;
@@ -324,7 +325,9 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: var(--highlight);
+    background-color: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 5px;
     margin: 2rem;
     padding-bottom: 2rem;
 }
@@ -344,7 +347,7 @@ button {
     border-right: 1px solid var(--deep);
     padding-left: 2rem;
     padding-right: 2rem;
-    background-color: var(--surface);
+    background-color: var(--page);
 }
 .results-box-1, .edit-box-1{
     margin-top: 3rem;
