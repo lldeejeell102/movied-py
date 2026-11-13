@@ -4,14 +4,23 @@
     curly brace + percent  -> logic: if / for / include, like <% ... %>
     curly brace + hash     -> a comment (like this one) that never reaches the browser
   This base.html is a shared layout. Other pages start with
-  extends "base.html" and fill in the "content" block below, so the
-  head and the header only have to be written once.
+  extends "base.html" and fill in the "title" and "content" blocks below, so
+  the head, header and footer only have to be written once.
 #}
 <!DOCTYPE html>
 <html lang="en">
-{% include "partials/head.html" %}
+<head>
+    {% include "partials/head.html" %}
+    {# Each page sets the browser-tab title with {% block title %}...{% endblock %} #}
+    <title>{% block title %}{% endblock %} · Movied</title>
+</head>
 <body>
-    {% block header %}{% include "partials/header-loggedin.html" %}{% endblock %}
-    {% block content %}{% endblock %}
+    {% include "partials/header.html" %}
+    <main class="container page">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="container">Movie data from the OMDb API</div>
+    </footer>
 </body>
 </html>

@@ -1,45 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% include "partials/head.html" %}
-  <body>
-    {% include "partials/header.html" %}
-    <div class="nav-space"></div>
-      <main>
-        <div class="login-form-div">
-          <form action="/user/signup" method="post">
-            <fieldset class="login-form">
-              <legend>New User</legend>
-{% if error %}<p class="form-error" style="color:#ff6b6b">{{ error }}</p>{% endif %}
-              <div class="form-inputs">
-                <label class="signup-username">
-                  USERNAME: <input type="text" name="username" required />
-                </label>
-                <label class="signup-password">
-                  &nbsp;&nbsp;PASSWORD: <input type="password" name="password" required />
-                </label>
-                <input type="submit" value="Create" />
-              </div>
-            </fieldset>
-          </form>
-        </div>
-        <div class="login-movie-posters">
-          <div class="poster login-jaws">
-            <h4>Jaws</h4>
-            <img src="https://m.media-amazon.com/images/M/MV5BMmVmODY1MzEtYTMwZC00MzNhLWFkNDMtZjAwM2EwODUxZTA5XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg">
-          </div>
-          <div class="poster login-thegodfather">
-            <h4>The Godfather</h4>
-            <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg">
-          </div>
-          <div class="poster login-ghostbusters">
-            <h4>Ghostbusters</h4>
-            <img src="https://m.media-amazon.com/images/M/MV5BMTkxMjYyNzgwMl5BMl5BanBnXkFtZTgwMTE3MjYyMTE@._V1_SX300.jpg">
-          </div>
-          <div class="poster login-abugslife">
-            <h4>A Bug's Life</h4>
-            <img src="https://m.media-amazon.com/images/M/MV5BNThmZGY4NzgtMTM4OC00NzNkLWEwNmEtMjdhMGY5YTc1NDE4XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg">
-          </div>
-        </div>
-      </main>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<section class="auth">
+    <div class="panel auth__card">
+        <h1 class="page-title">Create your account</h1>
+        <p class="page-sub">Keep track of every movie you watch, and when you watched it.</p>
+
+        {% if error %}<p class="alert" role="alert">{{ error }}</p>{% endif %}
+
+        <form class="stack" action="/user/signup" method="post">
+            <label class="field">
+                <span class="field__label">Username</span>
+                <input class="input" type="text" name="username" autocomplete="username" required autofocus>
+            </label>
+            <label class="field">
+                <span class="field__label">Password</span>
+                <input class="input" type="password" name="password" autocomplete="new-password" required>
+            </label>
+            <button class="btn btn--primary btn--block" type="submit">Create account</button>
+        </form>
+
+        <p class="auth__switch">Already have an account? <a href="/user/login">Log in</a></p>
+    </div>
+
+    {% include "user/_posters_signup.html" %}
+</section>
+{% endblock %}

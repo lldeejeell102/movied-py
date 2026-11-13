@@ -1,37 +1,48 @@
 {% extends "base.html" %}
+{% from "partials/macros.html" import poster %}
+{% block title %}Your list{% endblock %}
 {% block content %}
-    <h1 class="movies-index">Your Movies</h1>
-    <div class="movies">
-        {% for movie in movies %}
-            <div class="movie-block">
-                <img class="movie-block-img" src="{{ movie.Poster }}">
-                <div class="movie-block-title">
-                    <h2 class="movie-title">{{ movie.Title }}</h2>
-                </div>
-                <div class="movie-block-date">
-                    <h5 class="movie-released">{{ movie.Released }}</h5>
-                </div>
-                <div class="movie-block-starring">
-                    <h4 class="starring">Starring:</h4>
-                    <h4 class="movie-actors">{{ movie.Actors }}</h4>
-                </div>
-                <div class="movie-block-plot">
-                    <h5 class="plot">Plot:</h5>
-                    <h5 class="movie-plot">{{ movie.Plot }}</h5>
-                </div>
-                <div class="movie-block-watched-date">
-                    <h5 class="starring">Watched Date:</h5>
-                    <h5 class="movie-actors">{{ movie.Watched or "" }}</h5>
-                </div>
-                <div class="index-forms">
-                    <form action="/movies/{{ movie._id }}" method="GET">
-                        <button class="update-button">Update</button>
-                    </form>
-                    <form action="/movies/{{ movie._id }}?_method=DELETE" method="POST">
-                        <button class="delete-button">Delete</button>
-                    </form>
-                </div>
-            </div>
-        {% endfor %}
+<div class="page-head">
+    <div>
+        <h1 class="page-title">Your Movies</h1>
+        {# `movies|length` uses a "filter" (the | part) to count the list #}
+        <p class="page-sub">{{ movies|length }} {{ "movie" if movies|length == 1 else "movies" }} watched</p>
     </div>
+    <a class="btn btn--primary" href="/movies/add">Add movie</a>
+</div>
+
+{% if movies %}
+<ul class="movie-grid">
+    {% for movie in movies %}
+    <li class="movie-card">
+        {{ poster(movie, "movie-card__poster") }}
+        <div class="movie-card__body">
+            <h2 class="movie-card__title">{{ movie.Title }}</h2>
+            {% if movie.Released and movie.Released != "N/A" %}<p class="meta">Released {{ movie.Released }}</p>{% endif %}
+            <dl class="facts">
+                <dt>Starring</dt>
+                <dd>{{ movie.Actors }}</dd>
+                <dt>Plot</dt>
+                <dd class="clamp">{{ movie.Plot }}</dd>
+            </dl>
+            <p class="badge">{% if movie.Watched %}Watched {{ movie.Watched|nice_date }}{% else %}No watch date{% endif %}</p>
+        </div>
+        <div class="movie-card__actions">
+            <a class="btn btn--secondary btn--sm" href="/movies/{{ movie._id }}">Update</a>
+            <form action="/movies/{{ movie._id }}?_method=DELETE" method="POST"
+                  {# tojson safely turns the text into a JavaScript string, even with quotes in the title #}
+                  onsubmit='return confirm({{ ("Remove " ~ movie.Title ~ " from your list?")|tojson }})'>
+                <button class="btn btn--danger btn--sm" type="submit">Delete</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="panel empty">
+    <h2 class="empty__title">No movies yet</h2>
+    <p class="page-sub">Search for something you've watched and add it to your list.</p>
+    <a class="btn btn--primary" href="/movies/add">Find a movie</a>
+</div>
+{% endif %}
 {% endblock %}

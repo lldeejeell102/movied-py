@@ -1,0 +1,15 @@
+{#
+  A "macro" is a reusable template function. Pages load it with
+  {% from "partials/macros.html" import poster %} and call it like poster(movie).
+  OMDb returns the text "N/A" when a movie has no poster, so we show a
+  styled placeholder instead of a broken image.
+#}
+{% macro poster(movie, class="poster") -%}
+    {% if movie.Poster and movie.Poster != "N/A" %}
+        <img class="{{ class }}" src="{{ movie.Poster }}" alt="Poster for {{ movie.Title }}" loading="lazy">
+    {% else %}
+        <div class="{{ class }} poster--empty" role="img" aria-label="No poster for {{ movie.Title }}">
+            <span>{{ (movie.Title or "?")[:1] }}</span>
+        </div>
+    {% endif %}
+{%- endmacro %}

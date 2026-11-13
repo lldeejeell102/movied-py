@@ -1,45 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% include "partials/head.html" %}
-  <body>
-    {% include "partials/header.html" %}
-    <div class="nav-space"></div>
-    <main>
-      <div class="login-form-div">
-        <form action="/user/login" method="post">
-          <fieldset class="login-form">
-            <legend>Login</legend>
-{% if error %}<p class="form-error" style="color:#ff6b6b">{{ error }}</p>{% endif %}
-            <div class="form-inputs">
-              <label class="login-username">
-                USERNAME: <input type="text" name="username" required />
-              </label>
-              <label class="login-password">
-                &nbsp;&nbsp;PASSWORD: <input type="password" name="password" required />
-              </label>
-              <div class="login-button-form"><input type="submit" value="Login" /></div>
-            </div>
-          </fieldset>
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<section class="auth">
+    <div class="panel auth__card">
+        <h1 class="page-title">Welcome back</h1>
+        <p class="page-sub">Log in to see the movies you've watched.</p>
+
+        {% if error %}<p class="alert" role="alert">{{ error }}</p>{% endif %}
+
+        <form class="stack" action="/user/login" method="post">
+            <label class="field">
+                <span class="field__label">Username</span>
+                <input class="input" type="text" name="username" autocomplete="username" required autofocus>
+            </label>
+            <label class="field">
+                <span class="field__label">Password</span>
+                <input class="input" type="password" name="password" autocomplete="current-password" required>
+            </label>
+            <button class="btn btn--primary btn--block" type="submit">Log in</button>
         </form>
-      </div>
-      <div class="login-movie-posters">
-        <div class="poster login-barbie">
-          <h4>Barbie</h4>
-          <img src="https://m.media-amazon.com/images/M/MV5BNjU3N2QxNzYtMjk1NC00MTc4LTk1NTQtMmUxNTljM2I0NDA5XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg">
-        </div>
-        <div class="poster login-supermariobros">
-          <h4>Super Mario Bros</h4>
-          <img src="https://m.media-amazon.com/images/M/MV5BOTJhNzlmNzctNTU5Yy00N2YwLThhMjQtZDM0YjEzN2Y0ZjNhXkEyXkFqcGdeQXVyMTEwMTQ4MzU5._V1_SX300.jpg">
-        </div>
-        <div class="poster login-oppenheimer">
-          <h4>Oppenheimer</h4>
-          <img src="https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_SX300.jpg">
-        </div>
-        <div class="poster login-gotg3">
-          <h4>Fast X</h4>
-          <img src="https://m.media-amazon.com/images/M/MV5BNzZmOTU1ZTEtYzVhNi00NzQxLWI5ZjAtNWNhNjEwY2E3YmZjXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg">
-        </div>
-      </div>
-    </main>
-  </body>
-</html>
+
+        <p class="auth__switch">New to Movied? <a href="/user/signup">Create an account</a></p>
+    </div>
+
+    {% include "user/_posters_login.html" %}
+</section>
+{% endblock %}

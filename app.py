@@ -90,6 +90,19 @@ def create_app():
     # Plug in our method-override middleware (app.use(methodOverride(...))).
     app.wsgi_app = MethodOverrideMiddleware(app.wsgi_app)
 
+    # A custom template "filter": in a template, {{ "2024-06-20"|nice_date }}
+    # prints "Jun 20, 2024". Dates from the date picker are stored as
+    # "YYYY-MM-DD" text; anything that doesn't match is shown unchanged.
+    @app.template_filter("nice_date")
+    def nice_date(value):
+        from datetime import datetime
+
+        try:
+            d = datetime.strptime(value, "%Y-%m-%d")
+        except (TypeError, ValueError):
+            return value
+        return f"{d:%b} {d.day}, {d.year}"
+
     # `@app.route("/")` is a "decorator". It registers the function below it
     # as the handler for "/" — the same as app.get("/", (req, res) => {...}).
     @app.route("/")

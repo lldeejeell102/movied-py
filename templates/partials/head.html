@@ -1,25 +1,12 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Jquery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
-    
-    <!-- AlpineJS -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{# Shared <head> contents. The <title> lives in base.html, because a {% block %}
+   inside an included file can't be replaced by the page that extends base.html. #}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#533747">
 
-    <!-- AlpineJS -->
-    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
-  
-    <!-- OUR CSS AND JS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <!-- <script src="/app.js" defer></script> -->
+{# Fonts: Grenze Gotisch for the logo and page titles, Inter for everything else #}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Grenze Gotisch Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">

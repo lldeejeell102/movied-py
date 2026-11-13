@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+{% block title %}Add a movie{% endblock %}
 {% block content %}
-    <div class="search-movie-form">
-        <form action="/movies/results" method="POST">
-            <fieldset class="search-form">
-                <legend>Look up a Movie</legend>
-                <div class="search-form-inputs">
-                    <div class="input-title">
-                        <input size="35" type="text" name="title" placeholder="by title...">
-                    </div>
-                    <div class="input-year">
-                        <input size="35" class="input-year" type="text" name="year" placeholder="by year...">
-                    </div>
-                    <button class="search-button">Search</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+<section class="panel search">
+    <h1 class="page-title">Find a movie</h1>
+    <p class="page-sub">Search the OMDb catalog by title, then add it to your list.</p>
+
+    <form class="search__form" action="/movies/results" method="POST">
+        <label class="field search__title">
+            <span class="field__label">Title</span>
+            <input class="input" type="text" name="title" placeholder="e.g. The Godfather" required autofocus>
+        </label>
+        <label class="field search__year">
+            <span class="field__label">Year <span class="field__hint">optional</span></span>
+            <input class="input" type="text" name="year" placeholder="1972" inputmode="numeric" maxlength="4" pattern="[0-9]{4}">
+        </label>
+        <button class="btn btn--primary search__button" type="submit">Search</button>
+    </form>
+</section>
 {% endblock %}

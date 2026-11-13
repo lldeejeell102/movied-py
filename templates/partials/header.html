@@ -1,24 +1,24 @@
-<header>
-        <div class="header-buttons">
-        <h1 class="movied-title">Movied</h1>
-        <div class="nav-button">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <a class="login-hidden" href="/movies"><button>Your List</button></a>
-            <a class="login-header" href="/user/signup"><button>Signup</button></a>
-            <a class="login-header" href="/user/login"><button>Login</button></a>
-            <a class="login-hidden" href="/user/logout"><button>Logout</button></a>
-            <a class="login-hidden" href="/movies/add"><button>Add Movie</button></a>
-        </div>
-        <div class="mobile-nav-button">
-            <a class="login-hidden" href="/movies"><button>Your List</button></a>
-            <a class="login-header" href="/user/signup"><button>Signup</button></a>
-            <a class="login-header" href="/user/login"><button>Login</button></a>
-            <a class="login-hidden" href="/user/logout"><button>Logout</button></a>
-            <a class="login-hidden" href="/movies/add"><button>Add Movie</button></a>
-        </div>
+{#
+  One header for every page. `session` (the logged-in user) and `request`
+  (the current URL) are available in every Flask template automatically.
+  `request.endpoint` is the name of the route function, e.g. "movies.index",
+  which we use to underline the link for the page you're on.
+#}
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a class="logo" href="/movies/">Movied</a>
+        <nav class="nav" aria-label="Main">
+            {% if session.get("logged_in") %}
+                <a class="nav__link" href="/movies/"
+                   {% if request.endpoint == "movies.index" %}aria-current="page"{% endif %}>Your list</a>
+                <a class="nav__link" href="/movies/add"
+                   {% if request.endpoint in ("movies.new", "movies.results") %}aria-current="page"{% endif %}>Add movie</a>
+                <a class="nav__link nav__link--quiet" href="/user/logout">Log out</a>
+            {% else %}
+                <a class="nav__link" href="/user/login"
+                   {% if request.endpoint == "user.login_form" %}aria-current="page"{% endif %}>Log in</a>
+                <a class="btn btn--light btn--sm" href="/user/signup">Sign up</a>
+            {% endif %}
+        </nav>
     </div>
 </header>

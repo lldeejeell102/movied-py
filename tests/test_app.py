@@ -61,7 +61,7 @@ def test_full_movie_flow(client):
     with patch("blueprints.movies.requests.get") as g:
         g.return_value.json.return_value = omdb
         r = client.post("/movies/results", data={"title": "Jaws", "year": ""})
-        assert b"Jaws" in r.data and b"Movied!" in r.data
+        assert b"Jaws" in r.data and b"Add to my list" in r.data
         assert "t=jaws" in g.call_args[0][0]
 
     client.post("/movies/", data={"title": "Jaws", "year": "1975", "released": "20 Jun 1975",
@@ -71,10 +71,11 @@ def test_full_movie_flow(client):
     assert movie["username"] == "alice" and movie["Year"] == 1975
 
     r = client.get("/movies/")
-    assert b"Jaws" in r.data and b"2024-01-01" in r.data
+    # the nice_date filter shows "2024-01-01" as "Jan 1, 2024"
+    assert b"Jaws" in r.data and b"Watched Jan 1, 2024" in r.data
 
     r = client.get(f"/movies/{movie['_id']}")
-    assert b"Update!" in r.data
+    assert b"Save date" in r.data and b'value="2024-01-01"' in r.data
 
     client.post(f"/movies/{movie['_id']}?_method=PUT", data={"newwatched": "2025-05-05"})
     assert db.movies().find_one({"_id": movie["_id"]})["Watched"] == "2025-05-05"
