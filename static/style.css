@@ -1,10 +1,15 @@
-/* title{
-    color: #0D1B2A;
-    color: #1B263B;
-    color: #415A77;
-    color: #778DA9;
-    color: #E0E1DD;
-} */
+/* ///////////////////////////////////////////////////////////////////// */
+/* COLOR PALETTE — change a color here and it updates everywhere */
+:root{
+    --primary: #533747;    /* plum: header, main action buttons */
+    --highlight: #B7D5D4;  /* light teal: hovers, panels, title text */
+    --deep: #305252;       /* dark teal: text, borders, pressed buttons */
+    --muted: #77878B;      /* slate gray: labels and secondary text */
+    --accent: #488286;     /* teal: regular buttons, card borders */
+    --page: #EEF5F5;       /* very light tint of --highlight for the page background */
+    --surface: #FFFFFF;    /* cards and form boxes */
+}
+/* ///////////////////////////////////////////////////////////////////// */
 
 /* .title {
     display: flex;
@@ -20,7 +25,8 @@
 html{
     max-width: 100vw;
     margin: auto;
-    background-color: rgb(239, 239, 239);
+    background-color: var(--page);
+    color: var(--deep);
     /* position: fixed; */
 }
 body{
@@ -42,20 +48,20 @@ button{
     padding: 5px 15px
 }
 button:hover{
-    background-color: #778DA9;
-    color: whitesmoke;
-    border: 1px solid #0D1B2A;    
+    background-color: var(--highlight);
+    color: var(--deep);
 }
 button:active{
-    background-color: #093e93;
-    box-shadow: inset 0px 0px 5px #c1c1c1;
+    background-color: var(--deep);
+    color: var(--surface);
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.35);
 }
 .movied-title{
     font-family: "Grenze Gotisch", serif;
     font-style: normal;
     font-optical-sizing: auto;
     font-size: 42px;
-    color: whitesmoke;
+    color: var(--highlight);
 }
 a#logo-link:active, a#logo-link:visited, a#logo-link:focus, a#logo-link:link  {
     text-decoration: none;
@@ -64,15 +70,15 @@ a#logo-link:active, a#logo-link:visited, a#logo-link:focus, a#logo-link:link  {
     display:flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #0D1B2A;
-    color: whitesmoke;
+    background-color: var(--primary);
+    color: var(--surface);
     padding-top: 1.25rem;
     padding-bottom: 1.5rem;
 }
 button {
-    background-color: #415A77;
+    background-color: var(--accent);
     border: none;
-    color: whitesmoke;
+    color: var(--surface);
     text-align: center;
     padding: .5rem;
     cursor: pointer;
@@ -94,8 +100,8 @@ button {
     align-items: center;
     font: Verdana, sans-serif;
     text-transform: none;
-    background-color: white;
-    border: thin solid #0D1B2A;
+    background-color: var(--surface);
+    border: thin solid var(--deep);
     border-radius: 15px;
     width: 75vw;
     height: 25vh;
@@ -112,31 +118,36 @@ button {
 }
 .form-inputs input[type=submit]{
     margin-left: 1rem;
-    background-color: #0b57d0;
-    color: white;
+    background-color: var(--primary);
+    color: var(--surface);
+    border: none;
+    cursor: pointer;
     border-radius: 25px;
     padding: 5px 15px;
 }
-.form-inputs input:hover{
-    background-color: #1b3a5c;
-    color: whitesmoke;
+/* Text boxes get a soft highlight; the submit button gets the dark teal */
+.form-inputs input:hover, .form-inputs input:focus{
+    background-color: var(--highlight);
+    color: var(--deep);
+    outline-color: var(--accent);
 }
-.form-inputs input:focus{
-    background-color: #1b3a5c;
-    color: whitesmoke;
+.form-inputs input[type=submit]:hover, .form-inputs input[type=submit]:focus{
+    background-color: var(--deep);
+    color: var(--surface);
 }
 .form-inputs input:active{
-    background-color: #093e93;
-    box-shadow: inset 0px 0px 5px #c1c1c1;
+    background-color: var(--deep);
+    color: var(--surface);
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.35);
 }
 
 .signup-password input[type=password], .login-password input[type=password]{
     min-height: 1.75rem;
-    border: 1px solid black;
+    border: 1px solid var(--muted);
 }
 .signup-username input[type=text], .login-username input[type=text]{
     min-height: 1.75rem;
-    border: 1px solid black;
+    border: 1px solid var(--muted);
 }
 .login-username, .signup-username, .login-password, .signup-password {
     margin: 5px;
@@ -151,6 +162,7 @@ button {
     /* height:fit-content; */
     width: 24vw;
     text-align: center;
+    color: var(--muted);
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -173,6 +185,7 @@ button {
     font-optical-sizing: auto;
     font-size: 38px;
     text-align: center;
+    color: var(--primary);
 }
 .movies{
     display: flex;
@@ -186,12 +199,12 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 2px solid #415A77;
+    border: 2px solid var(--accent);
     border-radius: 5px;
     width: 33vw;
     margin: 2rem;
     padding: .5rem;
-    background-color: #E5E5E5;
+    background-color: var(--surface);
 }
 .movie-block-img{
     object-fit: contain;
@@ -225,7 +238,11 @@ button {
     justify-content: center;
 }
 
+.movie-title{
+    color: var(--primary);
+}
 .starring, .plot{
+    color: var(--muted);
     margin-right: 0.5rem;
     text-align: left;
 }
@@ -238,6 +255,9 @@ button {
 .delete-button, .update-button{
     width: 6rem;
     margin: 1rem;
+}
+.delete-button{
+    background-color: var(--primary);
 }
 
 @keyframes bounceKeyFrame {
@@ -269,8 +289,8 @@ button {
     /* margin-right: 10rem; */
     font: Verdana, sans-serif;
     text-transform: none;
-    background-color: #E0E1DD;
-    border: thin solid #0D1B2A;
+    background-color: var(--highlight);
+    border: thin solid var(--deep);
 }
 .input-title .input-year{
     width: 33%;
@@ -282,9 +302,8 @@ button {
     transition-duration: .01s;
 }
 .search-button:hover{
-    background-color: #778DA9;
-    color: black;
-    border: 0.5 solid #0D1B2A;
+    background-color: var(--deep);
+    color: var(--surface);
 }
 .search-movie-form{
     margin-top: 2.5rem;
@@ -305,7 +324,7 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: #E0E1DD;
+    background-color: var(--highlight);
     margin: 2rem;
     padding-bottom: 2rem;
 }
@@ -321,21 +340,27 @@ button {
 .results-box-1, .results-box-2, .results-box-3, .results-box-4, .edit-box-1, .edit-box-2, .edit-box-3, .edit-box-4, .edit-box-5{
     text-align: center;
     width: 50%;
-    border-left: 1px solid #0D1B2A;
-    border-right: 1px solid #0D1B2A;
+    border-left: 1px solid var(--deep);
+    border-right: 1px solid var(--deep);
     padding-left: 2rem;
     padding-right: 2rem;
-    background-color: whitesmoke;
+    background-color: var(--surface);
 }
 .results-box-1, .edit-box-1{
     margin-top: 3rem;
-    border-top: 1px solid #0D1B2A;
+    border-top: 1px solid var(--deep);
 }
 .results-box-4, .edit-box-5{
     margin-bottom: 15px;
-    border-bottom: 1px solid #0D1B2A;
+    border-bottom: 1px solid var(--deep);
 }
 
+.movied, .update{
+    background-color: var(--primary);
+}
+.results-titles, .edit-titles{
+    color: var(--muted);
+}
 .submit{
     display:flex;
     flex-direction: column;
