@@ -7,7 +7,8 @@
     --muted: #77878B;      /* slate gray: labels and secondary text */
     --accent: #488286;     /* teal: regular buttons, card borders */
     --page: #EEF5F5;       /* very light tint of --highlight for the page background */
-    --surface: #FFFFFF;    /* cards and form boxes */
+    --surface: #BBBBBF;    /* light gray: cards, panels and form boxes */
+    --on-dark: #FFFFFF;    /* white text on dark buttons and the header */
 }
 /* ///////////////////////////////////////////////////////////////////// */
 
@@ -49,11 +50,11 @@ button{
 }
 button:hover{
     background-color: var(--deep);
-    color: var(--surface);
+    color: var(--on-dark);
 }
 button:active{
     background-color: var(--deep);
-    color: var(--surface);
+    color: var(--on-dark);
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.35);
 }
 .movied-title{
@@ -71,14 +72,14 @@ a#logo-link:active, a#logo-link:visited, a#logo-link:focus, a#logo-link:link  {
     justify-content: space-evenly;
     align-items: center;
     background-color: var(--primary);
-    color: var(--surface);
+    color: var(--on-dark);
     padding-top: 1.25rem;
     padding-bottom: 1.5rem;
 }
 button {
     background-color: var(--accent);
     border: none;
-    color: var(--surface);
+    color: var(--on-dark);
     text-align: center;
     padding: .5rem;
     cursor: pointer;
@@ -119,7 +120,7 @@ button {
 .form-inputs input[type=submit]{
     margin-left: 1rem;
     background-color: var(--primary);
-    color: var(--surface);
+    color: var(--on-dark);
     border: none;
     cursor: pointer;
     border-radius: 25px;
@@ -133,11 +134,11 @@ button {
 }
 .form-inputs input[type=submit]:hover, .form-inputs input[type=submit]:focus{
     background-color: var(--deep);
-    color: var(--surface);
+    color: var(--on-dark);
 }
 .form-inputs input:active{
     background-color: var(--deep);
-    color: var(--surface);
+    color: var(--on-dark);
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.35);
 }
 
@@ -242,7 +243,7 @@ button {
     color: var(--primary);
 }
 .starring, .plot{
-    color: var(--muted);
+    color: var(--deep);  /* --muted is too faint on the gray cards */
     margin-right: 0.5rem;
     text-align: left;
 }
@@ -304,7 +305,7 @@ button {
 }
 .search-button:hover{
     background-color: var(--deep);
-    color: var(--surface);
+    color: var(--on-dark);
 }
 .search-movie-form{
     margin-top: 2.5rem;
