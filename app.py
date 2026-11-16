@@ -1,31 +1,15 @@
-"""Movied — Flask port of the original Express/EJS app.
-
-This is the entry point (the Python equivalent of server.js).
-Run it with:  python app.py
-
-A triple-quoted string at the very top of a file like this one is called a
-"docstring". It's just documentation — Python doesn't run it.
-"""
-
 # ---------------------------------------------------------------------------
 # IMPORTS (like `require(...)` in Node)
 # ---------------------------------------------------------------------------
-# `import os` gives us access to environment variables via os.environ,
-# which is Python's version of Node's `process.env`.
-import os
 
-# `from X import Y` pulls specific names out of a package, similar to
-# `const { Y } = require("X")` in JavaScript.
+import os
 from dotenv import load_dotenv  # same job as require("dotenv").config()
 from flask import Flask, redirect, url_for  # Flask is Python's "Express"
 
 # Read the .env file and put its values into os.environ.
-# We do this BEFORE importing our own routes so they can see the variables.
 load_dotenv()
 
 # Our route files ("blueprints" are Flask's version of express.Router()).
-# The `# noqa: E402` comment just tells code linters "yes, I know this import
-# isn't at the very top of the file, it's on purpose".
 from blueprints.movies import movies_bp  # noqa: E402
 from blueprints.user import user_bp  # noqa: E402
 
@@ -40,7 +24,6 @@ from blueprints.user import user_bp  # noqa: E402
 # `class` defines a new type of object. This one wraps the Flask app: every
 # request passes through __call__ first, where we can rewrite the method.
 class MethodOverrideMiddleware:
-    # A "set" — like a JS Set — of methods we allow forms to fake.
     ALLOWED = {"PUT", "DELETE", "PATCH"}
 
     # __init__ is the constructor (like `constructor()` in a JS class).
